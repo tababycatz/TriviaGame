@@ -55,12 +55,12 @@ var elem = $('#seconds');
 var timerId;
 var usedQ = [];
 var questionNum = 0; // this serves as index//
+var right = 0;
+var wrong = 0;
+
 
 
 //functions//
-
-
-
 
 function countdown() {
     if (count == 0) {
@@ -68,14 +68,13 @@ function countdown() {
         questionNum++;
         setQuestion();
 
-        console.log(timerId)
+        // console.log(timerId)
 
     } else {
 
         count--;
         $('#seconds').html(count + ' seconds'); //displays the time: replaces what is currently there//
 
-        console.log(count);
     }
 }
 
@@ -85,26 +84,25 @@ function setQuestion() {
     timerId = setInterval(countdown, 1000);
     $('#questions').html(questions[questionNum].q);
 
+
     //need for loop for answers// --> 
-    for (var i = 0; i < questions[questionNum].answer.length; i++) {
-        var button = $('<button>' + questions[questionNum].answer[i] + '</button')
+    for (var i = 0; i < questions[questionNum].answer[i].length; i++) {
+        var button = $('<button>' + questions[questionNum].answer[i] + '</button>')
+        $("#answerDiv").append(button)
 
-        button.appendTo('#answerDiv')
-
-
-        // button.html(questions[questionNum].answer[i]);
-        // button.attr(questions[questionNum].answer[i])
     }
 
-    if ($(this).text()===questions[questionNum.correct])
-    win++;
 
-    else {
-        lose++;
-    }
-    
+
+    // if ($(this).text()===questions[questionNum].correct)
+    // right++;
+
+    // else {
+    //     wrong++;
+    // }
+
     //need to have an on click event for the buttons and compare that with the "correct" answer in the questions array//
-    
+
     //setting question will be in questions array//
 }
 
