@@ -1,13 +1,15 @@
 .container {
     padding: 50px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Cinzel Decorative', cursive;
+    font-style: bold;
     color: white;
 }
 
 .button {
     background-color: black;
-    font-family: 'Oswald', sans-serif;
-    color: white;
+    font-family: 'Cinzel Decorative', cursive;
+    font-style: bold
+    
 }
 
 #mainTitle {
