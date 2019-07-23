@@ -1,29 +1,63 @@
 //set all vars up here//
-var questions = [];
-var count = 30;
-displayQ = setInterval(next, 3000);
+var questions = [{
+    q: "q1",
+    answer: ["A1", "A2", "A3", "A4"],
+    correct: "A2",
+},
+{
+    q: "q2",
+    answer: ["A1", "A2", "A3", "A4"],
+    correct: "A3",
+}];
 
-var intervalId;
+var count = 5;
+var elem = $('#seconds');
+var timerId;
+var usedQ = [];
+var questionNum = 0; // this serves as index//
 
-$("#questionDiv").on("click", next);
+
+//functions//
 
 
-function next() {
-    clearQuestion(intervalId);
-    intervalId = setInterval(decrement, 3000);
+function countdown() {
+    if (count == 0) {
+        clearTimeout(timerId);
+        questionNum++;
+        setQuestion();
+        
+        console.log(timerId)
+
+    } else {
+
+        count--;
+        $('#seconds').html(count + ' seconds'); //displays the time: replaces what is currently there//
+
+        console.log(count);
+    }
 }
 
-function decrement() {
+function setQuestion() {
+    
+    count = 5;
+    timerId=setInterval(countdown, 1000); 
+    $('#questions').html(questions[questionNum].q);
 
-    count--;
+    //need for loop for answers// --> 
+    for(var i = 0; i < questions[questionNum].answer.length; i++) {
+        var button =  $("<button>")
+      
+       button.text(questions[questionNum].answer[i]);
 
-    $("#timerDiv").text("<h2>" + count + "</h2>");
-
-    if (number === 0) {
-
-        next();
     }
+   
+    
+    // var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array
 
-    run();
+    //setting question will be in questions array//
+    console.log(questions[0].q);
+}
 
-};
+// $("#questionDiv").on("click",);
+
+setQuestion();
