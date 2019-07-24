@@ -53,7 +53,7 @@ var questions = [{
 var count = 30;
 var elem = $('#seconds');
 var timerId;
-var usedQ = [];
+var usedQ = []; //array for used questions//
 var questionNum = 0; // this serves as index//
 var right = 0;
 var wrong = 0;
@@ -62,13 +62,17 @@ var wrong = 0;
 
 //functions//
 
+function startGame() {
+    $().on("click");
+
+}
+
 function countdown() {
     if (count == 0) {
         clearTimeout(timerId);
         questionNum++;
         setQuestion();
-
-        // console.log(timerId)
+        wrong++;
 
     } else {
 
@@ -79,20 +83,32 @@ function countdown() {
 }
 
 function setQuestion() {
-
     count = 30;
     timerId = setInterval(countdown, 1000);
     $('#questions').html(questions[questionNum].q);
 
 
-    //need for loop for answers// --> 
+    //for loop for answers in obj array// --> 
+
     for (var i = 0; i < questions[questionNum].answer[i].length; i++) {
-        var button = $('<button>' + questions[questionNum].answer[i] + '</button>')
-        $("#answerDiv").append(button)
-
+        var button = $('<h4 class = choice>' + questions[questionNum].answer[i] + '</h4>')
+        $("#answers").append(button)
+        
     }
+    return button;
+   
+};
 
 
+setQuestion();
+
+
+    // if (questionOver) {
+
+    // } else {
+    //     setQuestion();
+
+    // }
 
     // if ($(this).text()===questions[questionNum].correct)
     // right++;
@@ -103,11 +119,11 @@ function setQuestion() {
 
     //need to have an on click event for the buttons and compare that with the "correct" answer in the questions array//
 
-    //setting question will be in questions array//
-}
-
-// $("#answerDiv").on("click",);
-setQuestion();
+    
 
 
-// var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array
+// $("#answers").on("click",);
+
+
+
+// var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array//
