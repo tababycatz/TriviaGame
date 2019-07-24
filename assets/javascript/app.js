@@ -1,24 +1,29 @@
-//set all vars up here//
-var questions = [{
-    q: "What is the sigil for House Mormont?",
-    answer: ["Lion", "Stag", "Bear", "Direwolf"],
-    correct: "Bear",
-},
-{
-    q: "Who was responsible for creating the Night King?",
-    answer: ["The Lord of Light", "The Children of the Forest", "The Drowned God", "The First Men"],
-    correct: "The Children of the Forest",
-},
-{
-    q: "Who was the leader of the Golden Company sellsword when Dany ransacked King's Landing? ",
-    answer: ["Wes Borland", "Harry Strickland", "Kiefer Sutherland", "Robert Westland"],
-    correct: "Harry Strickland",
-},
-{
-    q: "Who is Jon Snow's real father?",
-    answer: ["Ned Stark", "Rhaegar Targaryen", "Aegon Targaryen", "Robert Baratheon"],
-    correct: "Rhaegar Targaryen",
-},
+$(document).ready(function() {
+    //event listener//
+    $("#startBtn").on('click', startQuiz);
+
+
+    //set all vars up here//
+    var questions = [{
+        q: "What is the sigil for House Mormont?",
+        answer: ["Lion", "Stag", "Bear", "Direwolf"],
+        correct: "Bear",
+    },
+    {
+        q: "Who was responsible for creating the Night King?",
+        answer: ["The Lord of Light", "The Children of the Forest", "The Drowned God", "The First Men"],
+        correct: "The Children of the Forest",
+    },
+    {
+        q: "Who was the leader of the Golden Company sellsword when Dany ransacked King's Landing? ",
+        answer: ["Wes Borland", "Harry Strickland", "Kiefer Sutherland", "Robert Westland"],
+        correct: "Harry Strickland",
+    },
+    {
+        q: "Who is Jon Snow's real father?",
+        answer: ["Ned Stark", "Rhaegar Targaryen", "Aegon Targaryen", "Robert Baratheon"],
+        correct: "Rhaegar Targaryen",
+    },
 {
     q: "How many seasons did Game of Thrones have as a TV show?",
     answer: ["8", "7", "9", "6"],
@@ -53,7 +58,7 @@ var questions = [{
 var count = 30;
 var elem = $('#seconds');
 var timerId;
-var usedQ = []; //array for used questions//
+var playerAns = []; //array for used questions//
 var questionNum = 0; // this serves as index//
 var right = 0;
 var wrong = 0;
@@ -61,69 +66,90 @@ var wrong = 0;
 
 
 //functions//
+//need the start button to function on click event, then fade or go away so setQuestion can come into play//
+function startQuiz() {
+    
+    questionNum = 0;
+    right = 0;
+    wrong = 0;
+    clearInterval(timerID);
+};
 
-function startGame() {
-    $().on("click");
+$(timerDiv).show();
 
-}
 
 function countdown() {
-    if (count == 0) {
+    if (count === 0) {
         clearTimeout(timerId);
         questionNum++;
         setQuestion();
         wrong++;
-
+        
     } else {
-
+        
         count--;
         $('#seconds').html(count + ' seconds'); //displays the time: replaces what is currently there//
-
+        
     }
-}
+};
 
 function setQuestion() {
     count = 30;
     timerId = setInterval(countdown, 1000);
     $('#questions').html(questions[questionNum].q);
-
-
+    
+    
     //for loop for answers in obj array// --> 
-
+    
     for (var i = 0; i < questions[questionNum].answer[i].length; i++) {
         var button = $('<h4 class = choice>' + questions[questionNum].answer[i] + '</h4>')
         $("#answers").append(button)
         
-    }
+    };
+
     return button;
-   
+    
+    
+    var questionOver = (questions[questionNum].length -1) === setQuestion;
+    if (questionOver) {
+        
+    } else {
+    setQuestion();
+    
 };
 
+$('#results').text('<p>Right '+ right'</p>' + '<p>Wrong '+ wrong'</p>)
 
-setQuestion();
 
 
-    // if (questionOver) {
 
-    // } else {
-    //     setQuestion();
 
-    // }
 
-    // if ($(this).text()===questions[questionNum].correct)
-    // right++;
 
-    // else {
-    //     wrong++;
-    // }
 
-    //need to have an on click event for the buttons and compare that with the "correct" answer in the questions array//
-
+// if (questionOver) {
     
-
-
-// $("#answers").on("click",);
-
-
-
-// var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array//
+    // } else {
+        //     setQuestion();
+        
+        // }
+        
+        // if ($(this).text()===questions[questionNum].correct)
+        // right++;
+        
+        // else {
+            //     wrong++;
+            // }
+            
+            //need to have an on click event for the buttons and compare that with the "correct" answer in the questions array//
+            
+            
+            
+            
+            // $("#answers").on("click",);
+            
+            
+            
+            // var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array//
+            
+            });

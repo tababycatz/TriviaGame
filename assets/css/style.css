@@ -1,9 +1,15 @@
+button {
+    text-align: center;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
 .container {
     padding: 50px;
     font-family: 'Cinzel Decorative', cursive;
     font-style: bold;
     color: white;
 }
+
 
 .choice {
     font-size: 30px;
@@ -15,6 +21,7 @@
     text-align: center;
     
 }
+
 
 #mainTitle {
     font-size: 60px;
