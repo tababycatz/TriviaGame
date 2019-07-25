@@ -58,10 +58,10 @@ $(document).ready(function() {
 var count = 30;
 var elem = $('#seconds');
 var timerId;
-var playerAns = []; //array for used questions//
+var playerAns = []; //array for player's answers//
 var questionNum = 0; // this serves as index//
-var right = 0;
-var wrong = 0;
+var right = 0; // tally for right answers//
+var wrong = 0; //tally for wrong answers//
 
 
 
@@ -80,9 +80,8 @@ $(timerDiv).show();
 
 function countdown() {
     if (count === 0) {
-        clearTimeout(timerId);
+        clearInterval(timerId);
         questionNum++;
-        setQuestion();
         wrong++;
         
     } else {
@@ -99,57 +98,46 @@ function setQuestion() {
     $('#questions').html(questions[questionNum].q);
     
     
-    //for loop for answers in obj array// --> 
+    //for loop for answers in obj array -->//
     
-    for (var i = 0; i < questions[questionNum].answer[i].length; i++) {
+    for (var i = 0; i < questions[questionNum].answer.length; i++) {
         var button = $('<h4 class = choice>' + questions[questionNum].answer[i] + '</h4>')
         $("#answers").append(button)
         
     };
 
-    return button;
+    return button;  
     
-    
-    var questionOver = (questions[questionNum].length -1) === setQuestion;
-    if (questionOver) {
-        
-    } else {
-    setQuestion();
     
 };
 
-$('#results').text('<p>Right '+ right'</p>' + '<p>Wrong '+ wrong'</p>)
+var questionOver = (questions[questionNum].length - 1) === setQuestion;
+if (questionOver) {
 
+    console.log("Game over!")
 
-
-
-
-
-
-
-// if (questionOver) {
+} else {
+    questionNum++; 
+    setQuestion();
+};
     
-    // } else {
-        //     setQuestion();
-        
-        // }
-        
-        // if ($(this).text()===questions[questionNum].correct)
-        // right++;
-        
-        // else {
-            //     wrong++;
-            // }
-            
-            //need to have an on click event for the buttons and compare that with the "correct" answer in the questions array//
+
+$(document).on('click', '.choice', function() {
+console.log("working!")
+
+});
+
+setQuestion();
+
+// $('#results').text('<p>Right '+ right'</p>' + '<p>Wrong '+ wrong'</p>')//
+    
             
             
-            
-            
-            // $("#answers").on("click",);
+ 
+            // $("#answers").on("click",);//
             
             
             
             // var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array//
             
-            });
+});
