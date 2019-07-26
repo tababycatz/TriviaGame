@@ -1,5 +1,5 @@
 button {
-    text-align: center;
+    position: relative;
     font-family: 'Cinzel Decorative', cursive;
 }
 
@@ -20,6 +20,10 @@ button {
     cursor: pointer;
     text-align: center;
     
+}
+
+.choice:hover{
+    background-color: grey;
 }
 
 
