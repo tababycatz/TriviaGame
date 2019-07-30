@@ -1,15 +1,8 @@
 $(document).ready(function () {
     //event listener//
-    
-    
+
+
     //set all vars up here//
-    var count = 30;
-    var elem = $('#seconds');
-    var timerId;
-    var playerAns;
-    var questionNum = 0; // this serves as index//
-    var right = 0; // tally for right answers//
-    var wrong = 0; //tally for wrong answers//
 
     var questions = [{
         q: "What is the sigil for House Mormont?",
@@ -62,6 +55,13 @@ $(document).ready(function () {
         correct: "Onion Knight",
     }];
 
+    var count = 5;
+    var elem = $('#seconds');
+    var timerId;
+    var playerAns;
+    var questionNum = 0; // this serves as index//
+    var right = 0; // tally for right answers//
+    var wrong = 0; //tally for wrong answers//
 
 
 
@@ -89,75 +89,80 @@ $(document).ready(function () {
 
         }
     };
-    function nextQuestion() {
-        $("#answerDiv").empty();
-        $("#questions").next(questions[questionNum].q)       
-        }
 
-        //display next question, hide old question and hide old answers and display new anwer choice//
-        //if/else statement to compare # of questions to 
-    });
+    function nextQuestion() {
+
+        $("#questions").next(questions[questionNum].q)
+    }
+
+    //display next question, hide old question and hide old answers and display new anwer choice//
+    //if/else statement to compare # of questions to 
 
     function setQuestion() {
-        count = 30;
+        $("#answerDiv").empty();
+        count = 5;
         timerId = setInterval(countdown, 1000);
         $('#questions').html(questions[questionNum].q);
-        nextQuestion();
+        // nextQuestion();
 
-      // Clear button div of any newly created buttons
-
-      };
-    
-          //for loop for answers in obj array -->//
-
+        //for loop for answers in obj array -->//
         for (var i = 0; i < questions[questionNum].answer.length; i++) {
             var button = $('<p class = choice>' + questions[questionNum].answer[i] + '</p>')
             button.attr('data-value', questions[questionNum].answer[i])
             $("#answerDiv").append(button);
 
+            // return button;
         };
-        //empty the answerdiv after user click/time is out//
-        // return button;
-    
 
-    $(document).on('click', '.choice', function () {
-        clearInterval(timerId);
-        setQuestion();
-        playerAns = ($(this).attr('data-value'));
-        var rightAnswer = questions[questionNum].correct;
-
-        if (rightAnswer === playerAns) {
-            right++;
-            nextQuestion();
-            questionOver();
-
-        } else {
-            wrong++;
-            nextQuestion();
-            questionOver();
-          
-        }
-
-    });
-   
-// to account for all the questions in the array, to see if you're on the last one or to keep going//
-    var questionOver = (questions[questionNum].length - 1) === setQuestion;
-    if (questionOver) {
-
-        resultDisplay();
-        console.log("Game over!")
-
-    } else {
-        questionNum++;
-        nextQuestion();
+        // Clear button div of any newly created buttons
 
     };
 
+    //empty the answerdiv after user click/time is out//
+    
+    
+    $(document).on('click', '.choice', function () {
+        clearInterval(timerId);
+        playerAns = ($(this).attr('data-value'));
+        
+        var rightAnswer = questions[questionNum].correct;
+        questionNum++;
+        console.log(playerAns)
+        console.log(rightAnswer);
+        
+        if (rightAnswer === playerAns) {
+            right++;
+            // nextQuestion();
+            questionOver();
+            console.log("correct");
+            
+        } else {
+            wrong++;
+            // nextQuestion();
+            questionOver();
+            
+        }
+        
+    });
+
+    function questionOver() {
+        if (questionNum === 9) {
+            resultDisplay();
+
+        } else {
+            setQuestion();
+        }
+
+    };
+
+    // to account for all the questions in the array, to see if you're on the last one or to keep going//
+
 
     function resultDisplay() {
-        $("#resultTally").empty();
-        $("#resultTally").html("<p> Correct: " + right + "</p")
-        $("#resultTally").html("<p> Inorrect: " + wrong + "</p")
+        $("#correctTally").empty();
+        $("#incorrectTally").empty();
+        $("#correctTally").html("<p> Correct: " + right + "</p>")
+        $("#incorrectTally").html("<p> Incorrect: " + wrong + "</p>")
         console.log(right);
         console.log(wrong);
 
@@ -170,12 +175,14 @@ $(document).ready(function () {
         right = 0;
         wrong = 0;
         timerId = null;
-        $("#resetBtn").html();
-        $("#startBtn").on('click', function () {
-            $("#startBtn").hide();
-            setQuestion();
-        });
+        $("#resetBtn").html(); //look back to line 164/165//
     });
+    
+    $("#startBtn").on('click', function () {
+                $("#startBtn").hide();
+                setQuestion();
+            });
 
+});
 
     // var questionStore = Math.floor((Math.random() * questions.length)); randomly generates questions from array//
