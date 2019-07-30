@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    //event listener//
-
 
     //set all vars up here//
 
@@ -90,10 +88,6 @@ $(document).ready(function () {
         }
     };
 
-    function nextQuestion() {
-
-        $("#questions").next(questions[questionNum].q)
-    }
 
     //display next question, hide old question and hide old answers and display new anwer choice//
     //if/else statement to compare # of questions to 
@@ -103,7 +97,6 @@ $(document).ready(function () {
         count = 10;
         timerId = setInterval(countdown, 1000);
         $('#questions').html(questions[questionNum].q);
-        // nextQuestion();
 
         //for loop for answers in obj array -->//
         for (var i = 0; i < questions[questionNum].answer.length; i++) {
@@ -132,13 +125,11 @@ $(document).ready(function () {
         
         if (rightAnswer === playerAns) {
             right++;
-            // nextQuestion();
             questionOver();
             console.log("correct");
             
         } else {
             wrong++;
-            // nextQuestion();
             questionOver();
             
         }
@@ -172,14 +163,15 @@ $(document).ready(function () {
         questionNum = 0;
         right = 0;
         wrong = 0;
-
-        $("timerDiv").hide();
+        elem = $('#seconds');
+        playerAns;
+       
         $("#questionDiv").hide();
         $("#answerDiv").hide();
-        $("#resetBtn").show();
         $("#startBtn").show();
 
     });
+
     
 
 });
