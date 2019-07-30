@@ -55,7 +55,7 @@ $(document).ready(function () {
         correct: "Onion Knight",
     }];
 
-    var count = 5;
+    var count = 10;
     var elem = $('#seconds');
     var timerId;
     var playerAns;
@@ -100,7 +100,7 @@ $(document).ready(function () {
 
     function setQuestion() {
         $("#answerDiv").empty();
-        count = 5;
+        count = 10;
         timerId = setInterval(countdown, 1000);
         $('#questions').html(questions[questionNum].q);
         // nextQuestion();
@@ -146,7 +146,7 @@ $(document).ready(function () {
     });
 
     function questionOver() {
-        if (questionNum === 9) {
+        if (questionNum === 10) {
             resultDisplay();
 
         } else {
@@ -159,8 +159,6 @@ $(document).ready(function () {
 
 
     function resultDisplay() {
-        $("#correctTally").empty();
-        $("#incorrectTally").empty();
         $("#correctTally").html("<p> Correct: " + right + "</p>")
         $("#incorrectTally").html("<p> Incorrect: " + wrong + "</p>")
         console.log(right);
@@ -170,18 +168,19 @@ $(document).ready(function () {
 
 
     $(document).on('click', '#resetBtn', function () {
-        count = 30;
+        count = 10;
         questionNum = 0;
         right = 0;
         wrong = 0;
-        timerId = null;
-        $("#resetBtn").html(); //look back to line 164/165//
+
+        $("timerDiv").hide();
+        $("#questionDiv").hide();
+        $("#answerDiv").hide();
+        $("#resetBtn").show();
+        $("#startBtn").show();
+
     });
     
-    $("#startBtn").on('click', function () {
-                $("#startBtn").hide();
-                setQuestion();
-            });
 
 });
 
